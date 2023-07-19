@@ -1,0 +1,8 @@
+name: staging_test
+on:
+  push: branches: [ staging ]
+jobs:
+  steps:
+    name: staging
+      -run:|
+        npm test
