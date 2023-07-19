@@ -1,6 +1,7 @@
 name: staging_test
 on:
-  push: branches: [ staging ]
+  push: 
+    branches:[staging]
 jobs:
   steps:
     name: staging
