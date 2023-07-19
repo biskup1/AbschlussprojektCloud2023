@@ -1,0 +1,14 @@
+version: "3"  # docker-compose version
+services:
+  public:
+    build:
+      context: ./public
+    depends_on:
+      server
+    volumes:
+      - ./public/src:/app
+  server:
+    build:
+      context: ./server
+    volumes:
+      - ./server/src:/app
