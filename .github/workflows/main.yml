@@ -1,9 +1,14 @@
 name: staging_test
 on:
   push: 
-    branches:[staging]
+    branches: [staging]
 jobs:
-  steps:
-    name: staging
-      -run:|
-        npm test
+  build:
+    runs-on: node-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+    - run: npm ci
+    - run: npm test
