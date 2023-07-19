@@ -2,6 +2,9 @@ name: staging_test
 on:
   push: 
     branches: [staging]
+defaults:
+  run:
+    working-directory: ./server
 jobs:
   build:
     runs-on: ubuntu-latest
