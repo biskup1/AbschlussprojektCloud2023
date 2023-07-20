@@ -1,14 +1,44 @@
-version: "3"  # docker-compose version
+version: '3.8'
 services:
-  public:
-    build:
-      context: ./public
-    depends_on:
-      server
+  #####################
+  ### WebApp Nodejs
+  #####################
+  webapp:
+    restart: unless-stopped
+    build: ./public
+#    Uncomment this if you want to expose app too.
+    ports:
+      - 3000:${WEBAPP_PORT}
     volumes:
-      - ./public/src:/app
+      - ./public:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - node_network
+  
   server:
-    build:
-      context: ./server
+    restart: unless-stopped
+    build: ./server
+    ports:
+      - 5000:${SERVER_PORT}
     volumes:
-      - ./server/src:/app
+      - ./server:/usr/src/appserv
+      - /usr/src/appserv/node_modules
+    networks:
+      - node_network   
+  #####################
+  ### Nginx Proxy
+  #####################
+  proxy:
+    restart: unless-stopped
+    image: nginx
+    ports:
+      - 80:${NGINX_PORT}
+    depends_on:
+      - webapp
+    volumes:
+      - ./public/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - node_network
+
+networks:
+  node_network:
