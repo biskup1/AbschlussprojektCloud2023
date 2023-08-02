@@ -1,12 +1,8 @@
 version: '3.8'
 services:
-  #####################
-  ### WebApp Nodejs
-  #####################
   webapp:
     restart: unless-stopped
     build: ./public
-#    Uncomment this if you want to expose app too.
     ports:
       - 3000:${WEBAPP_PORT}
     volumes:
@@ -25,9 +21,7 @@ services:
       - /usr/src/appserv/node_modules
     networks:
       - node_network   
-  #####################
-  ### Nginx Proxy
-  #####################
+
   proxy:
     restart: unless-stopped
     image: nginx
