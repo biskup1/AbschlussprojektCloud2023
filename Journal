@@ -1,0 +1,5 @@
+csdc@<<IP>> activate WireGuard
+Install Git and Login on Proxmox over SSH on Terminal
+SSH pw:c*mp**09
+Auf aktuelle: git --version
+= 2.34.1
